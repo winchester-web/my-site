@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>YSN Brand</title>
+<title>Twin Star</title>
 
 <style>
 body {
@@ -10,21 +10,27 @@ margin: 0;
 font-family: Arial;
 background: black;
 color: white;
+overflow-x: hidden;
 }
 
-header {
-display: flex;
-justify-content: space-between;
-padding: 20px;
+/* Stars background */
+.stars {
+position: fixed;
+width: 100%;
+height: 100%;
+background: url('https://www.transparenttextures.com/patterns/stardust.png');
+animation: moveStars 50s linear infinite;
+z-index: -1;
 }
 
-.logo {
-font-size: 24px;
-font-weight: bold;
+@keyframes moveStars {
+from {background-position: 0 0;}
+to {background-position: 1000px 1000px;}
 }
 
+/* Hero */
 .hero {
-height: 90vh;
+height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -33,7 +39,14 @@ text-align: center;
 }
 
 .hero h1 {
-font-size: 50px;
+font-size: 60px;
+letter-spacing: 3px;
+animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+from {text-shadow: 0 0 10px white;}
+to {text-shadow: 0 0 30px white;}
 }
 
 .hero p {
@@ -47,8 +60,14 @@ background: white;
 color: black;
 border-radius: 30px;
 text-decoration: none;
+transition: 0.3s;
 }
 
+.btn:hover {
+transform: scale(1.1);
+}
+
+/* Products */
 .products {
 padding: 50px;
 display: flex;
@@ -62,11 +81,11 @@ padding: 20px;
 border-radius: 15px;
 width: 220px;
 text-align: center;
-transition: 0.3s;
+transition: 0.4s;
 }
 
 .card:hover {
-transform: scale(1.05);
+transform: translateY(-10px) scale(1.05);
 }
 
 .card img {
@@ -84,19 +103,15 @@ color: gray;
 
 <body>
 
-<header>
-<div class="logo">YSN 🔥</div>
-<div>Streetwear</div>
-</header>
+<div class="stars"></div>
 
 <section class="hero">
-<h1>Level Up Your Style</h1>
-<p>Simple. Clean. Powerful.</p>
-<a href="#" class="btn">Shop Now</a>
+<h1>TWIN STAR ✨</h1>
+<p>Shine Different. Shine Strong.</p>
+<a href="#" class="btn">Explore</a>
 </section>
 
 <section class="products">
-
 <div class="card">
 <img src="https://via.placeholder.com/200">
 <h3>Black Tee</h3>
@@ -108,13 +123,11 @@ color: gray;
 <h3>White Tee</h3>
 <p>50 DT</p>
 </div>
-
 </section>
 
 <footer>
-<p>© 2026 YSN Brand</p>
+<p>© 2026 Twin Star</p>
 </footer>
 
 </body>
 </html>
-
