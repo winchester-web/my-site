@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Brand</title>
+<title>YSN Brand</title>
 
 <style>
 body {
 margin: 0;
 font-family: Arial;
-background: #0f0f0f;
+background: black;
 color: white;
 }
 
@@ -16,46 +16,57 @@ header {
 display: flex;
 justify-content: space-between;
 padding: 20px;
-background: black;
 }
 
-header h1 {
-margin: 0;
+.logo {
+font-size: 24px;
+font-weight: bold;
 }
 
 .hero {
+height: 90vh;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
 text-align: center;
-padding: 100px 20px;
 }
 
-.hero h2 {
-font-size: 40px;
+.hero h1 {
+font-size: 50px;
+}
+
+.hero p {
+color: gray;
 }
 
 .btn {
-padding: 10px 25px;
+margin-top: 20px;
+padding: 12px 30px;
 background: white;
 color: black;
-border-radius: 20px;
+border-radius: 30px;
 text-decoration: none;
-display: inline-block;
-margin-top: 20px;
 }
 
 .products {
+padding: 50px;
 display: flex;
 justify-content: center;
-gap: 20px;
-padding: 50px;
-flex-wrap: wrap;
+gap: 30px;
 }
 
 .card {
-background: #1a1a1a;
+background: #111;
 padding: 20px;
-border-radius: 10px;
-width: 200px;
+border-radius: 15px;
+width: 220px;
 text-align: center;
+transition: 0.3s;
+}
+
+.card:hover {
+transform: scale(1.05);
 }
 
 .card img {
@@ -66,9 +77,7 @@ border-radius: 10px;
 footer {
 text-align: center;
 padding: 20px;
-background: black;
-margin-top: 50px;
-color: #aaa;
+color: gray;
 }
 </style>
 </head>
@@ -76,13 +85,13 @@ color: #aaa;
 <body>
 
 <header>
-<h1>My Brand 🔥</h1>
-<p>Streetwear</p>
+<div class="logo">YSN 🔥</div>
+<div>Streetwear</div>
 </header>
 
 <section class="hero">
-<h2>Welcome to my brand</h2>
-<p>Best style ever 😎</p>
+<h1>Level Up Your Style</h1>
+<p>Simple. Clean. Powerful.</p>
 <a href="#" class="btn">Shop Now</a>
 </section>
 
@@ -90,21 +99,22 @@ color: #aaa;
 
 <div class="card">
 <img src="https://via.placeholder.com/200">
-<h3>T-Shirt Black</h3>
+<h3>Black Tee</h3>
 <p>50 DT</p>
 </div>
 
 <div class="card">
 <img src="https://via.placeholder.com/200">
-<h3>T-Shirt White</h3>
+<h3>White Tee</h3>
 <p>50 DT</p>
 </div>
 
 </section>
 
 <footer>
-<p>© 2026 My Brand</p>
+<p>© 2026 YSN Brand</p>
 </footer>
 
 </body>
 </html>
+
