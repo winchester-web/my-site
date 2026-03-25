@@ -67,13 +67,16 @@
             color: #000;
             align-self: flex-end;
             border-bottom-right-radius: 2px;
+            border-right: 3px solid #fc5c7d;
         }
 
         .bot {
-            background-color: #2a2a2a;
+            background-color: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
             color: #fff;
             align-self: flex-start;
             border-bottom-left-radius: 2px;
+            border-left: 3px solid #6a82fb; /* Dean's Blue */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .typing-indicator {
@@ -123,12 +126,6 @@
     </style>
 </head>
 <body>
-<div class="chat-container">
-    <div id="messages"></div>
-    <div class="typing-indicator" id="typingIndicator" style="display: none; padding: 10px; font-style: italic; color: #888;">
-        YSN AI is thinking...
-    </div>
-    
     <div class="input-area" style="display: flex; padding: 15px; background: #111;">
         <input type="text" id="input" placeholder="Ask something..." autocomplete="off" style="flex:1; padding: 10px; border-radius: 5px; border: none;">
         <button id="send" style="margin-left: 10px; padding: 10px 20px; border-radius: 5px; border: none; background: linear-gradient(135deg, #6a82fb, #fc5c7d); color: white; cursor: pointer;">Send</button>
@@ -137,7 +134,7 @@
     <div class="chat-container">
         <div id="messages"></div>
         <div class="typing-indicator" id="typingIndicator">YSN AI is typing...</div>
-        
+          <div class="typing-indicator" id="typingIndicator">YSN AI is thinking...</div>
         <div class="input-area">
             <input type="text" id="input" placeholder="Ask something..." autocomplete="off">
             <button id="send">Send</button>
