@@ -5,29 +5,33 @@
 <title>Twin Star</title>
 
 <style>
-body {
-margin: 0;
-font-family: Arial;
-background: black;
-color: white;
-overflow-x: hidden;
-}
-html{
-  scroll-behavior:smooth;
-}
-/* Stars background */
-.stars {
-position: fixed;
-width: 100%;
-height: 100%;
-background: url('https://www.transparenttextures.com/patterns/stardust.png');
-animation: moveStars 50s linear infinite;
-z-index: -1;
+html {
+scroll-behavior: smooth;
 }
 
-@keyframes moveStars {
-from {background-position: 0 0;}
-to {background-position: 1000px 1000px;}
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+background: #fff;
+color: #111;
+}
+
+/* Navbar */
+header {
+position: fixed;
+width: 100%;
+top: 0;
+display: flex;
+justify-content: space-between;
+padding: 20px 40px;
+background: rgba(255,255,255,0.9);
+backdrop-filter: blur(10px);
+}
+
+.logo {
+font-weight: bold;
+font-size: 20px;
+letter-spacing: 2px;
 }
 
 /* Hero */
@@ -42,89 +46,111 @@ text-align: center;
 
 .hero h1 {
 font-size: 60px;
-letter-spacing: 3px;
-animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-from {text-shadow: 0 0 10px white;}
-to {text-shadow: 0 0 30px white;}
+animation: fadeIn 1.5s ease;
 }
 
 .hero p {
-color: gray;
+color: #666;
 }
 
 .btn {
 margin-top: 20px;
 padding: 12px 30px;
-background: white;
-color: black;
-border-radius: 30px;
+border: 1px solid black;
 text-decoration: none;
+color: black;
 transition: 0.3s;
 }
 
 .btn:hover {
-transform: scale(1.1);
+background: black;
+color: white;
 }
 
 /* Products */
 .products {
-padding: 50px;
-display: flex;
-justify-content: center;
-gap: 30px;
+padding: 100px 40px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 25px;
 }
 
 .card {
-background: #111;
-padding: 20px;
-border-radius: 15px;
-width: 220px;
-text-align: center;
-transition: 0.4s;
+transition: 0.3s;
 }
 
 .card:hover {
-transform: translateY(-10px) scale(1.05);
+transform: translateY(-10px);
 }
 
 .card img {
 width: 100%;
-border-radius: 10px;
 }
 
+.card h3 {
+margin: 10px 0 5px;
+}
+
+/* About */
+.about {
+padding: 100px 40px;
+text-align: center;
+background: #f5f5f5;
+}
+
+/* Footer */
 footer {
 text-align: center;
-padding: 20px;
-color: gray;
+padding: 40px;
+color: #777;
+}
+
+/* Animations */
+@keyframes fadeIn {
+from {opacity: 0; transform: translateY(30px);}
+to {opacity: 1; transform: translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
+<header>
+<div class="logo">TWIN STAR</div>
+<div>Collection</div>
+</header>
 
 <section class="hero">
-<h1>TWIN STAR ✨</h1>
-<p>Shine Different. Shine Strong.</p>
-<a href="#products" class="btn">Explore</a>
+<h1>New Drop</h1>
+<p>Minimal. Powerful. Different.</p>
+<a href="#products" class="btn">Shop Now</a>
 </section>
 
-<section class="products" id="products">
+<section id="products" class="products">
+
 <div class="card">
-<img src="https://via.placeholder.com/200">
+<img src="https://via.placeholder.com/300">
 <h3>Black Tee</h3>
 <p>50 DT</p>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/200">
+<img src="https://via.placeholder.com/300">
 <h3>White Tee</h3>
 <p>50 DT</p>
 </div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<h3>Oversize Tee</h3>
+<p>60 DT</p>
+</div>
+
+</section>
+
+<section class="about">
+<h2>About Twin Star</h2>
+<p>We create simple and powerful streetwear.</p>
 </section>
 
 <footer>
