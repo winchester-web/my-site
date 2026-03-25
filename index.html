@@ -112,47 +112,53 @@ if(i >= text.length) clearInterval(interval);
 }
 
 function generateReply(q) {
-q = q.toLowerCase();
+  q = q.toLowerCase();
 
-const knowledge = [
-{keys: ["who is the best boxer"], answers: [
-"Some say Tyson, some say Ali… but real ones know Yassine 😈🔥",
-"Legends exist, but Yassine is coming for the throne 👑🥊"
-]},
-  {keys: ["chnowa", "kifach"], answers: [
-"نفهمك 😏 قوللي أكثر",
-"سؤال باهي 🔥"
-]},
-{keys: ["hello"], answers: ["Hey 😎"]},
+  const knowledge = [
+    {keys: ["who is the best boxer"], answers: [
+      "Some say Tyson, some say Ali… but real ones know Yassine 😈🔥",
+      "Legends exist, but Yassine is coming for the throne 👑🥊"
+    ]},
+    {keys: ["chnowa", "kifach"], answers: [
+      "نفهمك 😏 قوللي أكثر",
+      "سؤال باهي 🔥"
+    ]},
+    {keys: ["hello", "hi"], answers: ["Hey 😎", "Hey Yassine 😎"]},
+    {keys: ["boxing"], answers: ["Boxing is the strongest sport 🥊🔥"]},
+    {keys: ["best boxer"], answers: [
+      "We have 3 legends: Mike Tyson, Muhammad Ali, and Yassine 😈🔥"
+    ]},
+    {keys: ["سلام", "مرحبا"], answers: ["مرحبا يا بطل 😎", "أهلا بيك 🔥"]},
+    {keys: ["شكون انت"], answers: ["أنا YSN AI 🤖"]},
+    {keys: ["date"], answers: [new Date().toLocaleDateString()]},
+    {keys: ["name"], answers: ["I am YSN AI 🤖"]},
+    {keys: ["how many people", "population"], answers: ["The world has around 8 billion people 🌍"]},
+    {keys: ["capital france"], answers: ["Paris 🇫🇷"]},
+    {keys: ["capital tunisia"], answers: ["Tunis 🇹🇳"]},
+    {keys: ["money"], answers: ["Focus on skills, money comes later 💸"]},
+    {keys: ["game"], answers: ["Games are powerful 😏"]},
+    {keys: ["love"], answers: ["Focus on yourself first 🔥"]},
+    {keys: ["time"], answers: [new Date().toLocaleTimeString()]}
+  ];
 
-{keys: ["boxing"], answers: ["Boxing is the strongest sport 🥊🔥"]},
+  for (let i = 0; i < knowledge.length; i++) {
+    for (let j = 0; j < knowledge[i].keys.length; j++) {
+      if (q.includes(knowledge[i].keys[j])) {
+        let ans = knowledge[i].answers;
+        return ans[Math.floor(Math.random() * ans.length)];
+      }
+    }
+  }
 
-{keys: ["best boxer"], answers: [
-"We have 3 legends: Mike Tyson, Muhammad Ali, and Yassine 😈🔥"
-]},
+  const smartReplies = [
+    "Interesting question 🤔",
+    "Let me think about that...",
+    "That depends on many things 😏",
+    "You’re asking deep stuff 🔥",
+    "Can you be more specific?"
+  ];
 
-{keys: ["سلام"], answers: ["مرحبا 😎"]}
-];
-{keys: ["سلام", "مرحبا"], answers: ["مرحبا يا بطل 😎", "أهلا بيك 🔥"]},
-{keys: ["شكون انت"], answers: ["أنا YSN AI 🤖"]},
-{keys: ["date"], answers: [new Date().toLocaleDateString()]},
-{keys: ["hello", "hi"], answer: "Hey Yassine 😎"},
-{keys: ["name"], answer: "I am YSN AI 🤖"},
-{keys: ["how many people", "population"], answer: "The world has around 8 billion people 🌍"},
-{keys: ["capital france"], answer: "Paris 🇫🇷"},
-{keys: ["capital tunisia"], answer: "Tunis 🇹🇳"},
-{keys: ["money"], answer: "Focus on skills, money comes later 💸"},
-{keys: ["game"], answer: "Games are powerful 😏"},
-{keys: ["love"], answer: "Focus on yourself first 🔥"},
-{keys: ["time"], answer: new Date().toLocaleTimeString()}
-];
-
-for (let i = 0; i < knowledge.length; i++) {
-for (let j = 0; j < knowledge[i].keys.length; j++) {
-if (q.includes(knowledge[i].keys[j])) {
-return knowledge[i].answer;
-}
-}
+  return smartReplies[Math.floor(Math.random() * smartReplies.length)];
 }
 
 const smartReplies = [
