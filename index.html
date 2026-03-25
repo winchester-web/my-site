@@ -10,32 +10,29 @@ margin: 0;
 font-family: Arial;
 background: #0f0f0f;
 color: white;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
 }
 
 .chat {
-width: 350px;
-height: 500px;
-background: #1a1a1a;
-border-radius: 15px;
+width: 400px;
+height: 600px;
+background: #181818;
+border-radius: 20px;
 display: flex;
 flex-direction: column;
 overflow: hidden;
+box-shadow: 0 0 30px #000;
 }
 
 .messages {
 flex: 1;
-padding: 10px;
+padding: 15px;
 overflow-y: auto;
 }
 
 .msg {
 margin: 10px 0;
-padding: 10px;
-border-radius: 10px;
+padding: 10px 15px;
+border-radius: 15px;
 max-width: 70%;
 }
 
@@ -46,26 +43,24 @@ align-self: flex-end;
 }
 
 .bot {
-background: #333;
-}
-
-.inputBox {
-display: flex;
+background: #2a2a2a;
 }
 
 input {
 flex: 1;
-padding: 10px;
+padding: 15px;
 border: none;
+outline: none;
+background: #111;
+color: white;
 }
 
 button {
-padding: 10px;
-border: none;
+padding: 15px;
 background: white;
+border: none;
 cursor: pointer;
-}
-</style>
+}</style>
 </head>
 
 <body>
@@ -99,6 +94,8 @@ let msg = document.createElement("div");
 msg.className = "msg " + type;
 msg.innerText = text;
 document.getElementById("messages").appendChild(msg);
+document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
+  
 }
 
 function typeMessage(text) {
@@ -108,30 +105,71 @@ document.getElementById("messages").appendChild(msg);
 
 let i = 0;
 let interval = setInterval(() => {
-msg.innerText += text[i];
+msg.innerText += text.charAt(i);
 i++;
 if(i >= text.length) clearInterval(interval);
-}, 30);
+}, 15);
 }
 
 function generateReply(q) {
 q = q.toLowerCase();
 
-if(q.includes("hello")) return "Hey Yassine 😎";
-if(q.includes("ai")) return "I am your smart AI 🤖";
-if(q.includes("money")) return "Focus on skills, then money comes 💸";
-if(q.includes("game")) return "Games are powerful 😏";
-if(q.includes("who")) return "I am YSN AI, created by Yassine 🔥";
+const knowledge = [
+{keys: ["who is the best boxer"], answers: [
+"Some say Tyson, some say Ali… but real ones know Yassine 😈🔥",
+"Legends exist, but Yassine is coming for the throne 👑🥊"
+]},
+  {keys: ["chnowa", "kifach"], answers: [
+"نفهمك 😏 قوللي أكثر",
+"سؤال باهي 🔥"
+]},
+{keys: ["hello"], answers: ["Hey 😎"]},
 
-let random = [
-"Interesting 🤔",
-"Tell me more...",
-"That’s smart 😏",
-"I’m learning from you 😅"
+{keys: ["boxing"], answers: ["Boxing is the strongest sport 🥊🔥"]},
+
+{keys: ["best boxer"], answers: [
+"We have 3 legends: Mike Tyson, Muhammad Ali, and Yassine 😈🔥"
+]},
+
+{keys: ["سلام"], answers: ["مرحبا 😎"]}
+];
+{keys: ["سلام", "مرحبا"], answers: ["مرحبا يا بطل 😎", "أهلا بيك 🔥"]},
+{keys: ["شكون انت"], answers: ["أنا YSN AI 🤖"]},
+{keys: ["date"], answers: [new Date().toLocaleDateString()]},
+{keys: ["hello", "hi"], answer: "Hey Yassine 😎"},
+{keys: ["name"], answer: "I am YSN AI 🤖"},
+{keys: ["how many people", "population"], answer: "The world has around 8 billion people 🌍"},
+{keys: ["capital france"], answer: "Paris 🇫🇷"},
+{keys: ["capital tunisia"], answer: "Tunis 🇹🇳"},
+{keys: ["money"], answer: "Focus on skills, money comes later 💸"},
+{keys: ["game"], answer: "Games are powerful 😏"},
+{keys: ["love"], answer: "Focus on yourself first 🔥"},
+{keys: ["time"], answer: new Date().toLocaleTimeString()}
 ];
 
-return random[Math.floor(Math.random() * random.length)];
+for (let i = 0; i < knowledge.length; i++) {
+for (let j = 0; j < knowledge[i].keys.length; j++) {
+if (q.includes(knowledge[i].keys[j])) {
+return knowledge[i].answer;
 }
+}
+}
+
+const smartReplies = [
+"Interesting question 🤔",
+"Let me think about that...",
+"That depends on many things 😏",
+"You’re asking deep stuff 🔥",
+"Can you be more specific?"
+];
+
+return smartReplies[Math.floor(Math.random() * smartReplies.length)];
+}
+  document.getElementById("input").addEventListener("keypress", function(e) {
+if(e.key === "Enter") send();
+});
+
+
 </script>
 
 </body>
