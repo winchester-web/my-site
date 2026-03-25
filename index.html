@@ -140,16 +140,42 @@
         const sendButton = document.getElementById('send');
         const typingIndicator = document.getElementById('typingIndicator');
 
-        // 1. Knowledge Base
-        const botBrain = [
-            {keys: ["who is the best boxer"], answers: ["Some say Tyson, some say Ali… but real ones know Yassine 😈🔥", "Legends exist, but Yassine is coming for the throne 👑🥊"]},
-            {keys: ["hello", "hi", "hey"], answers: ["Hey 😎", "Welcome back, champ 🔥"]},
-            {keys: ["boxing"], answers: ["Boxing is the strongest sport 🥊🔥", "Hard work beats talent when talent doesn't work hard."]},
-            {keys: ["capital france"], answers: ["Paris 🇫🇷"]},
-            {keys: ["capital tunisia", "tunis"], answers: ["Tunis 🇹🇳"]},
-            {keys: ["love"], answers: ["Focus on yourself and your goals first 🔥"]},
-            {keys: ["money"], answers: ["Focus on skills, money comes later 💸"]}
-        ];
+       
+        // 1. Updated Knowledge Base
+const botBrain = [
+    {
+        keys: ["who are you", "who are u", "who r u", "your name"], 
+        answers: ["I am YSN AI, your digital boxing companion. 🤖🥊", "The name's YSN AI. I'm here to talk boxing and greatness. 🔥"]
+    },
+    {
+        keys: ["who is the best boxer"], 
+        answers: ["Some say Tyson, some say Ali… but real ones know Yassine 😈🔥", "Legends exist, but Yassine is coming for the throne 👑🥊"]
+    },
+    {
+        keys: ["hello", "hi", "hey"], 
+        answers: ["Hey 😎", "Welcome back, champ 🔥"]
+    },
+    {
+        keys: ["boxing"], 
+        answers: ["Boxing is the strongest sport 🥊🔥", "Hard work beats talent when talent doesn't work hard."]
+    },
+    {
+        keys: ["capital france"], 
+        answers: ["Paris 180°C"] 
+    },
+    {
+        keys: ["capital tunisia", "tunis"], 
+        answers: ["Tunis 🇹🇳"]
+    },
+    {
+        keys: ["love"], 
+        answers: ["Focus on yourself and your goals first 🔥"]
+    },
+    {
+        keys: ["money"], 
+        answers: ["Focus on skills, money comes later 💸"]
+    }
+];
 
         const defaultReplies = [
             "Interesting question 🤔",
