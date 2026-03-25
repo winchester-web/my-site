@@ -2,160 +2,137 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Twin Star</title>
+<title>YSN AI</title>
 
 <style>
-html {
-scroll-behavior: smooth;
-}
-
 body {
 margin: 0;
-font-family: Arial, sans-serif;
-background: #fff;
-color: #111;
-}
-
-/* Navbar */
-header {
-position: fixed;
-width: 100%;
-top: 0;
-display: flex;
-justify-content: space-between;
-padding: 20px 40px;
-background: rgba(255,255,255,0.9);
-backdrop-filter: blur(10px);
-}
-
-.logo {
-font-weight: bold;
-font-size: 20px;
-letter-spacing: 2px;
-}
-
-/* Hero */
-.hero {
-height: 100vh;
+font-family: Arial;
+background: #0f0f0f;
+color: white;
 display: flex;
 justify-content: center;
 align-items: center;
+height: 100vh;
+}
+
+.chat {
+width: 350px;
+height: 500px;
+background: #1a1a1a;
+border-radius: 15px;
+display: flex;
 flex-direction: column;
-text-align: center;
+overflow: hidden;
 }
 
-.hero h1 {
-font-size: 60px;
-animation: fadeIn 1.5s ease;
+.messages {
+flex: 1;
+padding: 10px;
+overflow-y: auto;
 }
 
-.hero p {
-color: #666;
+.msg {
+margin: 10px 0;
+padding: 10px;
+border-radius: 10px;
+max-width: 70%;
 }
 
-.btn {
-margin-top: 20px;
-padding: 12px 30px;
-border: 1px solid black;
-text-decoration: none;
+.user {
+background: white;
 color: black;
-transition: 0.3s;
+align-self: flex-end;
 }
 
-.btn:hover {
-background: black;
-color: white;
+.bot {
+background: #333;
 }
 
-/* Products */
-.products {
-padding: 100px 40px;
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 25px;
+.inputBox {
+display: flex;
 }
 
-.card {
-transition: 0.3s;
+input {
+flex: 1;
+padding: 10px;
+border: none;
 }
 
-.card:hover {
-transform: translateY(-10px);
-}
-
-.card img {
-width: 100%;
-}
-
-.card h3 {
-margin: 10px 0 5px;
-}
-
-/* About */
-.about {
-padding: 100px 40px;
-text-align: center;
-background: #f5f5f5;
-}
-
-/* Footer */
-footer {
-text-align: center;
-padding: 40px;
-color: #777;
-}
-
-/* Animations */
-@keyframes fadeIn {
-from {opacity: 0; transform: translateY(30px);}
-to {opacity: 1; transform: translateY(0);}
+button {
+padding: 10px;
+border: none;
+background: white;
+cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">TWIN STAR</div>
-<div>Collection</div>
-</header>
+<div class="chat">
+<div class="messages" id="messages"></div>
 
-<section class="hero">
-<h1>New Drop</h1>
-<p>Minimal. Powerful. Different.</p>
-<a href="#products" class="btn">Shop Now</a>
-</section>
-
-<section id="products" class="products">
-
-<div class="card">
-<img src="https://via.placeholder.com/300">
-<h3>Black Tee</h3>
-<p>50 DT</p>
+<div class="inputBox">
+<input id="input" placeholder="Ask something...">
+<button onclick="send()">Send</button>
+</div>
 </div>
 
-<div class="card">
-<img src="https://via.placeholder.com/300">
-<h3>White Tee</h3>
-<p>50 DT</p>
-</div>
+<script>
+function send() {
+let input = document.getElementById("input");
+let text = input.value;
+if(!text) return;
 
-<div class="card">
-<img src="https://via.placeholder.com/300">
-<h3>Oversize Tee</h3>
-<p>60 DT</p>
-</div>
+addMessage(text, "user");
+input.value = "";
 
-</section>
+setTimeout(() => {
+let reply = generateReply(text);
+typeMessage(reply);
+}, 500);
+}
 
-<section class="about">
-<h2>About Twin Star</h2>
-<p>We create simple and powerful streetwear.</p>
-</section>
+function addMessage(text, type) {
+let msg = document.createElement("div");
+msg.className = "msg " + type;
+msg.innerText = text;
+document.getElementById("messages").appendChild(msg);
+}
 
-<footer>
-<p>© 2026 Twin Star</p>
-</footer>
+function typeMessage(text) {
+let msg = document.createElement("div");
+msg.className = "msg bot";
+document.getElementById("messages").appendChild(msg);
+
+let i = 0;
+let interval = setInterval(() => {
+msg.innerText += text[i];
+i++;
+if(i >= text.length) clearInterval(interval);
+}, 30);
+}
+
+function generateReply(q) {
+q = q.toLowerCase();
+
+if(q.includes("hello")) return "Hey Yassine 😎";
+if(q.includes("ai")) return "I am your smart AI 🤖";
+if(q.includes("money")) return "Focus on skills, then money comes 💸";
+if(q.includes("game")) return "Games are powerful 😏";
+if(q.includes("who")) return "I am YSN AI, created by Yassine 🔥";
+
+let random = [
+"Interesting 🤔",
+"Tell me more...",
+"That’s smart 😏",
+"I’m learning from you 😅"
+];
+
+return random[Math.floor(Math.random() * random.length)];
+}
+</script>
 
 </body>
 </html>
