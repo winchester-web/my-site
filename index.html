@@ -123,7 +123,17 @@
     </style>
 </head>
 <body>
-
+<div class="chat-container">
+    <div id="messages"></div>
+    <div class="typing-indicator" id="typingIndicator" style="display: none; padding: 10px; font-style: italic; color: #888;">
+        YSN AI is thinking...
+    </div>
+    
+    <div class="input-area" style="display: flex; padding: 15px; background: #111;">
+        <input type="text" id="input" placeholder="Ask something..." autocomplete="off" style="flex:1; padding: 10px; border-radius: 5px; border: none;">
+        <button id="send" style="margin-left: 10px; padding: 10px 20px; border-radius: 5px; border: none; background: linear-gradient(135deg, #6a82fb, #fc5c7d); color: white; cursor: pointer;">Send</button>
+    </div>
+</div>
     <div class="chat-container">
         <div id="messages"></div>
         <div class="typing-indicator" id="typingIndicator">YSN AI is typing...</div>
@@ -174,6 +184,31 @@ const botBrain = [
     {
         keys: ["money"], 
         answers: ["Focus on skills, money comes later 💸"]
+    }
+    {
+        keys: ["my name is", "i am called"],
+        answers: (input) => {
+            const name = input.toLowerCase().split("is").pop().trim();
+            userData.name = name;
+            localStorage.setItem('userName', name);
+            return `Got it! I'll remember that, ${name}. 😎`;
+        }
+    },
+    {
+        keys: ["supernatural", "dean winchester", "impala"],
+        answers: ["Saving people, hunting things... the family business. 🔫🖤", "Dean Winchester: The man who loves pie and his '67 Impala. A true legend."]
+    },
+    {
+        keys: ["the originals", "klaus mikaelson", "always and forever"],
+        answers: ["I am the Hybrid! I can't be killed! 🐺🦇", "Always and Forever. Family is power. ⚜️🍷"]
+    },
+    {
+        keys: ["who are you", "who are u"],
+        answers: ["I am YSN AI. Part Winchester, part Mikaelson, and 100% your assistant. 🤖"]
+    },
+    {
+        keys: ["time", "sa3a"],
+        answers: () => `It is currently ${new Date().toLocaleTimeString()}. Time to be great. ⏳`
     }
 ];
 
