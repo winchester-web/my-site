@@ -132,7 +132,7 @@ function generateReply(q) {
     {keys: ["شكون انت"], answers: ["أنا YSN AI 🤖"]},
     {keys: ["date"], answers: [new Date().toLocaleDateString()]},
     {keys: ["name"], answers: ["I am YSN AI 🤖"]},
-    {keys: ["how many people", "population"], answers: ["The world has around 8 billion people 🌍"]},
+    {keys: ["population"], answers: ["The world has around 8 billion people 🌍"]},
     {keys: ["capital france"], answers: ["Paris 🇫🇷"]},
     {keys: ["capital tunisia"], answers: ["Tunis 🇹🇳"]},
     {keys: ["money"], answers: ["Focus on skills, money comes later 💸"]},
@@ -149,6 +149,18 @@ function generateReply(q) {
       }
     }
   }
+
+  const smartReplies = [
+    "Interesting question 🤔",
+    "Let me think about that...",
+    "That depends on many things 😏",
+    "You’re asking deep stuff 🔥",
+    "Can you be more specific?"
+  ];
+
+  return smartReplies[Math.floor(Math.random() * smartReplies.length)];
+}
+
 
   const smartReplies = [
     "Interesting question 🤔",
