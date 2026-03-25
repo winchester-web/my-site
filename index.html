@@ -6,109 +6,113 @@
 
 <style>
 body {
-margin: 0;
-font-family: Arial;
-background: #0f0f0f;
-color: white;
+  margin: 0;
+  font-family: Arial;
+  background: #0f0f0f;
+  color: white;
 }
 
 .chat {
-width: 400px;
-height: 600px;
-background: #181818;
-border-radius: 20px;
-display: flex;
-flex-direction: column;
-overflow: hidden;
-box-shadow: 0 0 30px #000;
+  width: 400px;
+  height: 600px;
+  background: #181818;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 30px #000;
 }
 
 .messages {
-flex: 1;
-padding: 15px;
-overflow-y: auto;
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
 }
 
 .msg {
-margin: 10px 0;
-padding: 10px 15px;
-border-radius: 15px;
-max-width: 70%;
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 70%;
 }
 
 .user {
-background: white;
-color: black;
-align-self: flex-end;
+  background: white;
+  color: black;
+  align-self: flex-end;
 }
 
 .bot {
-background: #2a2a2a;
+  background: #2a2a2a;
+}
+
+.inputBox {
+  display: flex;
 }
 
 input {
-flex: 1;
-padding: 15px;
-border: none;
-outline: none;
-background: #111;
-color: white;
+  flex: 1;
+  padding: 15px;
+  border: none;
+  outline: none;
+  background: #111;
+  color: white;
 }
 
 button {
-padding: 15px;
-background: white;
-border: none;
-cursor: pointer;
-}</style>
+  padding: 15px;
+  background: white;
+  border: none;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
 
 <div class="chat">
-<div class="messages" id="messages"></div>
+  <div class="messages" id="messages"></div>
 
-<div class="inputBox">
-<input id="input" placeholder="Ask something...">
-<button onclick="send()">Send</button>
-</div>
+  <div class="inputBox">
+    <input id="input" placeholder="Ask something...">
+    <button onclick="send()">Send</button>
+  </div>
 </div>
 
 <script>
 function send() {
-let input = document.getElementById("input");
-let text = input.value;
-if(!text) return;
+  let input = document.getElementById("input");
+  let text = input.value;
+  if(!text) return;
 
-addMessage(text, "user");
-input.value = "";
+  addMessage(text, "user");
+  input.value = "";
 
-setTimeout(() => {
-let reply = generateReply(text);
-typeMessage(reply);
-}, 500);
+  setTimeout(() => {
+    let reply = generateReply(text);
+    typeMessage(reply);
+  }, 500);
 }
 
 function addMessage(text, type) {
-let msg = document.createElement("div");
-msg.className = "msg " + type;
-msg.innerText = text;
-document.getElementById("messages").appendChild(msg);
-document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
-  
+  let msg = document.createElement("div");
+  msg.className = "msg " + type;
+  msg.innerText = text;
+  document.getElementById("messages").appendChild(msg);
+  document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
 }
 
 function typeMessage(text) {
-let msg = document.createElement("div");
-msg.className = "msg bot";
-document.getElementById("messages").appendChild(msg);
+  let msg = document.createElement("div");
+  msg.className = "msg bot";
+  document.getElementById("messages").appendChild(msg);
 
-let i = 0;
-let interval = setInterval(() => {
-msg.innerText += text.charAt(i);
-i++;
-if(i >= text.length) clearInterval(interval);
-}, 15);
+  let i = 0;
+  let interval = setInterval(() => {
+    msg.innerText += text.charAt(i);
+    i++;
+    if(i >= text.length) clearInterval(interval);
+  }, 15);
 }
 
 function generateReply(q) {
@@ -161,34 +165,11 @@ function generateReply(q) {
   return smartReplies[Math.floor(Math.random() * smartReplies.length)];
 }
 
-
-  const smartReplies = [
-    "Interesting question 🤔",
-    "Let me think about that...",
-    "That depends on many things 😏",
-    "You’re asking deep stuff 🔥",
-    "Can you be more specific?"
-  ];
-
-  return smartReplies[Math.floor(Math.random() * smartReplies.length)];
-}
-
-const smartReplies = [
-"Interesting question 🤔",
-"Let me think about that...",
-"That depends on many things 😏",
-"You’re asking deep stuff 🔥",
-"Can you be more specific?"
-];
-
-return smartReplies[Math.floor(Math.random() * smartReplies.length)];
-}
-  document.getElementById("input").addEventListener("keypress", function(e) {
-if(e.key === "Enter") send();
+document.getElementById("input").addEventListener("keypress", function(e) {
+  if(e.key === "Enter") send();
 });
-
-
 </script>
 
 </body>
 </html>
+
