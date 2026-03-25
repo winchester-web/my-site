@@ -6,71 +6,173 @@
     <title>YSN AI Chatbot</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f0f;
             color: #E0E0E0;
             margin: 0;
-            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
         .chat-container {
             width: 100%;
-            max-width: 600px;
-            margin: auto;
+            max-width: 500px;
+            height: 600px;
+            background-color: #181818;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid #2a2a2a;
+        }
+
+        #messages {
+            flex: 1;
             padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        #messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        #messages::-webkit-scrollbar-thumb {
+            background: #333;
             border-radius: 10px;
-            background-color: #1E1E1E;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
+
         .message {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            position: relative;
-            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            max-width: 75%;
+            font-size: 15px;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .user {
-            background-color: #2196F3;
-            color: white;
-            margin-left: auto;
+            background-color: #ffffff;
+            color: #000;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
         }
+
         .bot {
-            background-color: #424242;
-            color: white;
+            background-color: #2a2a2a;
+            color: #fff;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
         }
+
         .typing-indicator {
+            font-size: 13px;
             font-style: italic;
-            color: #B0BEC5;
+            color: #888;
+            padding: 0 20px 10px;
+            display: none;
         }
+
+        .input-area {
+            display: flex;
+            padding: 15px;
+            background-color: #111;
+            gap: 10px;
+        }
+
+        #input {
+            flex: 1;
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 12px;
+            color: white;
+            outline: none;
+        }
+
+        #input:focus {
+            border-color: #6a82fb;
+        }
+
         #send {
             background: linear-gradient(135deg, #6a82fb, #fc5c7d);
             border: none;
             color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 0 20px;
+            border-radius: 10px;
             cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, filter 0.2s;
         }
-        #input {
-            width: calc(100% - 70px);
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
+
+        #send:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
         }
     </style>
 </head>
 <body>
-    <div class="chat-container" id="chatContainer">
+
+    <div class="chat-container">
         <div id="messages"></div>
-        <div class="typing-indicator" id="typingIndicator" style="display: none;">Typing...</div>
-        <input type="text" id="input" placeholder="Type your message..."/>
-        <button id="send">Send</button>
+        <div class="typing-indicator" id="typingIndicator">YSN AI is typing...</div>
+        
+        <div class="input-area">
+            <input type="text" id="input" placeholder="Ask something..." autocomplete="off">
+            <button id="send">Send</button>
+        </div>
     </div>
+
     <script>
         const messagesDiv = document.getElementById('messages');
         const inputField = document.getElementById('input');
         const sendButton = document.getElementById('send');
         const typingIndicator = document.getElementById('typingIndicator');
 
+        // 1. Knowledge Base
+        const botBrain = [
+            {keys: ["who is the best boxer"], answers: ["Some say Tyson, some say Ali… but real ones know Yassine 😈🔥", "Legends exist, but Yassine is coming for the throne 👑🥊"]},
+            {keys: ["hello", "hi", "hey"], answers: ["Hey 😎", "Welcome back, champ 🔥"]},
+            {keys: ["boxing"], answers: ["Boxing is the strongest sport 🥊🔥", "Hard work beats talent when talent doesn't work hard."]},
+            {keys: ["capital france"], answers: ["Paris 🇫🇷"]},
+            {keys: ["capital tunisia", "tunis"], answers: ["Tunis 🇹🇳"]},
+            {keys: ["love"], answers: ["Focus on yourself and your goals first 🔥"]},
+            {keys: ["money"], answers: ["Focus on skills, money comes later 💸"]}
+        ];
+
+        const defaultReplies = [
+            "Interesting question 🤔",
+            "Let me think about that...",
+            "That depends on many things 😏",
+            "You’re asking deep stuff 🔥"
+        ];
+
+        // 2. Logic
+        function getResponse(input) {
+            const query = input.toLowerCase();
+            
+            for (let item of botBrain) {
+                for (let key of item.keys) {
+                    if (query.includes(key)) {
+                        return item.answers[Math.floor(Math.random() * item.answers.length)];
+                    }
+                }
+            }
+            return defaultReplies[Math.floor(Math.random() * defaultReplies.length)];
+        }
+
+        // 3. UI Functions
         function appendMessage(text, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message ' + sender;
@@ -79,28 +181,35 @@
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
-        function simulateTyping(text) {
+        function handleSend() {
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user');
+            inputField.value = '';
+
+            // Show typing indicator
             typingIndicator.style.display = 'block';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            // Simulate AI "thinking"
             setTimeout(() => {
                 typingIndicator.style.display = 'none';
-                appendMessage(text, 'bot');
-            }, 2000);
+                const reply = getResponse(text);
+                appendMessage(reply, 'bot');
+            }, 1000 + Math.random() * 1000);
         }
 
-        sendButton.addEventListener('click', () => {
-            const userInput = inputField.value;
-            if (userInput) {
-                appendMessage(userInput, 'user');
-                inputField.value = '';
-                simulateTyping('This is an example response.'); // Replace with actual response logic
-            }
+        // 4. Events
+        sendButton.addEventListener('click', handleSend);
+        inputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
         });
 
-        inputField.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendButton.click();
-            }
-        });
+        // Initial Greeting
+        setTimeout(() => {
+            appendMessage("Welcome to YSN AI. What's on your mind?", "bot");
+        }, 500);
     </script>
 </body>
 </html>
